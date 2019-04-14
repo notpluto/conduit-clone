@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700|Titillium+Web:300,400,700');
+
+.tag-container {
+	width: 220px;
+	height: 250px;
+	padding: 10px;
+	background: '#F3F3F3';
+	margin: 10px 0 20px 0;
+	color: #373A3C;
+	font-size: 0.9rem;
+}
+
+input:focus {
+	outline: 1px solid #66AFE9;
+}
+h2 a {
+	text-decoration: none;
+	color: #5CB65C;
+	font-family: 'Titillium Web', sans-serif;
+}
+
+a{
+	text-decoration: none;
+}
+.fa-heart{
+	font-size: 0.8rem;
+	margin: 0 4px;
+}
+.fa-heart:hover {
+	color: #fff;
+}
+.fav {
+	outline: #5CB75C;
+	border: 1px solid #5CB75C;
+	border-radius: 4px;
+	cursor: pointer;
+	color: #5CB65C;
+	display: inline-block;
+}
+.fav:hover{
+	background: #5CB75C;
+	color: #fff;
+}
