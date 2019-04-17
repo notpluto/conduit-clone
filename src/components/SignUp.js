@@ -35,19 +35,38 @@ const Button = styled.button`
 
 class SignUp extends React.Component {
 	state= {
-		input: '',
+		username: '',
+		email:'',
+		password:''
 	}
+
+	handleUpdate = (e) => {
+		this.setState({[e.target.name]: e.target.value})
+	}
+
+	handleSubmit = () => {
+    fetch('https://conduit.productionready.io/api/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({user: this.state}),
+    })
+      .then(res => res.json())
+      .then(d => console.log(d));
+  };
+
 	render() {
 		return (
 			<React.Fragment>
 				<Navigation />
 				<Wrapper>
 					<div style={{fontSize: "2.2rem", textAlign: "center", marginBottom:'4px'}}>Sign Up</div>
-					<a style={{textDecoration:'none',}}href="#"><div style={{textAlign: 'center', color: '#5CB75C', }}>Need an account?</div></a>
-					<Input type="username" name="username" placeholder="Username" />
-					<Input type="email" name="email" placeholder="Email" />
-					<Input type="password" name="password" placeholder="Password" />
-					<Button type="submit">Sign Up</Button>
+					<a href='/signin' style={{textDecoration:'none',}}href="#"><div style={{textAlign: 'center', color: '#5CB75C', }}>Have an account?</div></a>
+					<Input type="username" onChange={this.handleUpdate} name="username" placeholder="Username" value={this.state.username} />
+					<Input type="email" onChange={this.handleUpdate} name="email" placeholder="Email" value={this.state.email} />
+					<Input type="password" onChange={this.handleUpdate} name="password" placeholder="Password" value={this.state.password} />
+					<Button onClick={this.handleSubmit} type="submit">Sign Up</Button>
 				</Wrapper>
 			</React.Fragment>
 		)

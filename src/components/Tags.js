@@ -6,7 +6,8 @@ const Button = styled.button`
 	background: #687077;
 	color: #fff;
 	border-radius: 10px;
-	padding: 4px;
+	padding: 6px;
+	margin: 2px;
 	outline: 0;
 	cursor: pointer;
 `
@@ -23,13 +24,24 @@ class Tags extends React.Component {
 		// this.setState({tags: data})
 	}
 
+	handleTags = (item) => {
+		console.log(item)
+		fetch(`https://conduit.productionready.io/api/articles?tag=${item}`)
+			.then(res => res.json()).then(obj =>  
+				this.props.dispatch({
+					type: 'FILTER_USING_TAGS',
+					payload: obj.articles
+				})
+			)
+	}
+
 	render() {
 		// console.log(this.props)
 		return (
 			<React.Fragment>
 				<div className="tag-container">Popular Tags <br/>
 				{
-					this.props.tags ? this.props.tags.map(elm => elm.tags.map(item => <Button>{item}</Button>)) : ""
+					this.props.tags ? this.props.tags.map(elm => elm.tags.map(item => <Button onClick={() => this.handleTags(item)}>{item}</Button>)) : ""
 				}
 				</div>	
 			</React.Fragment>
@@ -39,7 +51,8 @@ class Tags extends React.Component {
 
 function mapStateToProps(state) {
 	return {
-		tags: state.Tags
+		tags: state.Tags,
+		FilterTags: state.Articles[0]
 	}
 }
 

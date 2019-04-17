@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 const Button = styled.button`
 	border: 0;
@@ -18,7 +19,7 @@ class Navigation extends React.Component {
 		return (
 			<React.Fragment>
 				<Nav>
-					<h2 style={{color: '#5CB75C', fontSize: '1.4rem', fontWeight: 'bold', marginLeft: '10rem', letterSpacing: '1px'}}><a href="#">conduit</a></h2>
+					<h2 style={{color: '#5CB75C', fontSize: '1.4rem', fontWeight: 'bold', marginLeft: '10rem', letterSpacing: '1px'}}><NavLink to='/'><a href="#">conduit</a></NavLink></h2>
 					<div style={{marginRight: '10rem'}}>
 						<a href='/'><Button>Home</Button></a>
 						<a href='/signin'><Button>Sign in</Button></a>

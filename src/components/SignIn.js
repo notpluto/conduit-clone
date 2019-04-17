@@ -42,7 +42,7 @@ class SignIn extends React.Component {
 				<Navigation />
 				<Wrapper>
 					<div style={{fontSize: "2.2rem", paddingBottom: '10px', textAlign: "center", marginBottom:'4px'}}>Sign In</div>
-					<a style={{textDecoration:'none',}}href="#"><div style={{textAlign: 'center', color: '#5CB75C', }}>Need an account?</div></a>
+					<a href='/signup' style={{textDecoration:'none',}}href="#"><div style={{textAlign: 'center', color: '#5CB75C', }}>Need an account?</div></a>
 					<Input type="email" name="email" placeholder="Email" />
 					<Input type="password" name="password" placeholder="Password" />
 					<Button type="submit">Sign In</Button>

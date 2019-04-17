@@ -2,12 +2,12 @@
 
 .tag-container {
 	width: 220px;
-	height: 250px;
-	padding: 10px;
-	background: '#F3F3F3';
-	margin: 10px 0 20px 0;
+	/*height: 250px;*/
+	padding: 20px;
+	background: #F3F3F3;
+	margin: 0;
 	color: #373A3C;
-	font-size: 0.9rem;
+	font-size: 1rem;
 }
 
 input:focus {
@@ -40,4 +40,7 @@ a{
 .fav:hover{
 	background: #5CB75C;
 	color: #fff;
+}
+small{
+	color: #5CB65C;
 }

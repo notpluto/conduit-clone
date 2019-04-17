@@ -6,6 +6,7 @@ const HeroWrapper = styled.div`
 	color: #fff;
 	text-align: center;
 `
+
 class Hero extends React.Component {
 	render() {
 		return (
