@@ -2,6 +2,7 @@ import React from 'react';
 import Navigation from './Navigation';
 import styled from 'styled-components';
 // import { Redirect } from 'react-router-dom'
+import { connect } from 'react-redux';
 import SignIn from './SignIn'
 
 const Wrapper = styled.div`
@@ -56,12 +57,12 @@ class SignUp extends React.Component {
     })
       .then(res => res.json())
       .then(d => {
-      	console.log(d);
       	if (d.user) {
       		let jwt = d.user.token
-      		localStorage.setItem('jwt', jwt)
-      		this.props.history.push('/signin')
+      		localStorage.setItem('jwt', jwt);
       	}
+      	this.props.dispatch({type: 'ADD_USER', payload: d.user });
+      	this.props.history.push('/');
       });
   };
 
@@ -82,4 +83,4 @@ class SignUp extends React.Component {
 	}
 }
 
-export default SignUp;
+export default connect(({UserInfo}) => ({UserInfo}))(SignUp);

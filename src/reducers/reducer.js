@@ -34,8 +34,24 @@ export function User(state=[], action) {
 		case 'SHOW_USER_SECTION':
 			return [...state, action.payload]
 		case 'SHOW_USER_ARTICLES':
-			return state, action.payload
+			return state, action.payload;
 		default:
 			return state;
 	}
 }
+
+export function UserInfo(state = null, action) {
+	console.log(state, action)
+	switch(action.type) {
+		case 'ADD_USER':
+			return {
+				...state,
+				...action.payload
+			}
+		default:
+			return state;
+	}
+}
+
+
+

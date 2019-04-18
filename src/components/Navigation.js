@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
+import {connect} from 'react-redux';
 
 const Button = styled.button`
 	border: 0;
@@ -21,9 +22,15 @@ class Navigation extends React.Component {
 				<Nav>
 					<h2 style={{color: '#5CB75C', fontSize: '1.4rem', fontWeight: 'bold', marginLeft: '10rem', letterSpacing: '1px'}}><NavLink to='/'><a href="#">conduit</a></NavLink></h2>
 					<div style={{marginRight: '10rem'}}>
-						<a href='/'><Button>Home</Button></a>
-						<a href='/signin'><Button>Sign in</Button></a>
-						<a href='/signup'><Button>Sign up</Button></a>
+						<Link to='/'><Button>Home</Button></Link>
+						<Link to='/signin'><Button>Sign in</Button></Link>
+						{
+							this.props.UserInfo ? <Link to='/newpost'><Button>New Post</Button></Link> : ''
+						}
+						{
+							this.props.UserInfo ? <Link to=''><Button>Logout</Button></Link> : <Link to='/signup'><Button>Sign up</Button></Link>
+						}
+						
 					</div>
 				</Nav>
 			</React.Fragment>
@@ -31,4 +38,4 @@ class Navigation extends React.Component {
 	}
 }
 
-export default Navigation;
+export default connect(({UserInfo}) => ({UserInfo}))(Navigation);

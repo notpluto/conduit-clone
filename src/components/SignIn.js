@@ -1,5 +1,6 @@
 import React from 'react';
 import Navigation from './Navigation';
+import { connect} from 'react-redux';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -37,25 +38,38 @@ const Button = styled.button`
 
 class SignIn extends React.Component {
 	state = {
-		email: '',
-		password: ''
+		email: 'ukngukng',
+		password: 'ukngukng'
+	}
+	handleChange = ({target}) => {
+		this.setState({[target.name]: target.value})
 	}
 
 	handleSignIn = () => {
-		fetch('https://conduit.productionready.io/api/users/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({user: this.state}),
-    })
-    .then(res => res.json())
-    .then(d => {
-    	let jwt = localStorage.getItem('jwt');
-    	if (d.user && d.user.token == jwt) {
-    		this.props.history.push('/');
-    	}
-    })
+		// fetch('https://conduit.productionready.io/api/users/login', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({user: this.state}),
+  //   })
+  //   .then(res => res.json())
+  //   .then(d => {
+  //   	let jwt = localStorage.getItem('jwt');
+  //   	if (d.user && d.user.token == jwt) {
+  //   		this.props.history.push('/');
+  //   	}
+  //   })
+  var jwt = localStorage.jwt;
+  fetch('https://conduit.productionready.io/api/user',{
+		headers: {
+	    "Content-Type": "application/json",
+	    "authorization": `Token ${jwt}`
+	  }}).then(res => res.json()).then(data => {
+	  	console.log(data,'in signin');
+	  	this.props.dispatch({type: 'ADD_USER', payload: data.user});
+	  	this.props.history.push('/')
+	  })
 	}
 
 	render() {
@@ -65,8 +79,8 @@ class SignIn extends React.Component {
 				<Wrapper>
 					<div style={{fontSize: "2.2rem", paddingBottom: '10px', textAlign: "center", marginBottom:'4px'}}>Sign In</div>
 					<a href='/signup' style={{textDecoration:'none',}}href="#"><div style={{textAlign: 'center', color: '#5CB75C', }}>Need an account?</div></a>
-					<Input type="email" name="email" placeholder="Email" />
-					<Input type="password" name="password" placeholder="Password" />
+					<Input type="email" name="email" placeholder="Email" value={this.state.email} onChange={this.handleChange} />
+					<Input type="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleChange}/>
 					<Button onClick={this.handleSignIn} type="submit">Sign In</Button>
 				</Wrapper>
 			</React.Fragment>
@@ -74,4 +88,4 @@ class SignIn extends React.Component {
 	}
 }
 
-export default SignIn;
+export default connect()(SignIn);

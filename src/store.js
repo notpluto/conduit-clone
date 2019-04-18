@@ -1,11 +1,12 @@
 import { createStore, combineReducers } from 'redux';
-import { Tags, Articles, FilterTags, User } from './reducers/reducer'
+import { Tags, Articles, FilterTags, User, UserInfo } from './reducers/reducer'
 
 const rootReducer = combineReducers({
 	Tags,
 	Articles,
 	FilterTags,
-	User
+	User,
+	UserInfo
 })
 
 export const store = createStore(rootReducer);

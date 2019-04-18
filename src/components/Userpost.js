@@ -4,6 +4,8 @@ import { NavLink } from 'react-router-dom';
 import Navigation from './Navigation';
 import { connect } from 'react-redux';
 import FontAwesome from 'react-fontawesome';
+import CommentInput from './CommentInput';
+
 
 const Userhead = styled.div`
 	background: #333333;
@@ -41,7 +43,6 @@ class Userpost extends React.Component {
 
 			{
 				this.props.comments ? this.props.comments.map(obj => 
-
 				<CommentBox>
 					<p style={{margin: '1rem',}}>{obj.body}</p>
 					<div style={{background: '#F5F5F5', display: 'flex', }}>
@@ -52,17 +53,18 @@ class Userpost extends React.Component {
 				</CommentBox>
 					)
 				: ""
-			}	
-
+			}
+			<CommentInput />
 			</React.Fragment>
 			)
 	}
 
 }
 
-function mapStateToProps(state) {
+function mapStateToProps({UserInfo, User}) {
 	return {
-		comments: state.User
+		comments: User,
+		UserInfo
 	}
 }
 export default connect(mapStateToProps)(Userpost);
