@@ -55,7 +55,7 @@ class Articles extends React.Component {
 		const arr = filterTags.length ? filterTags : articles || [];
 
 
-		console.log(this.props.articles)
+		console.log(filterTags)
 		return (
 			<React.Fragment>
 			<div style={{margin:'2rem 10rem 0rem 12rem', color: '#5CB75C', fontSize:'0.9rem'}}>Global Feed</div>
@@ -99,7 +99,8 @@ function mapStateToProps(state) {
 	console.log(state);
 	return {
 		articles: state.Articles[0],
-		filterTags: state.FilterTags
+		filterTags: state.FilterTags,
+		tags: state.Tags
 	}
 }
 

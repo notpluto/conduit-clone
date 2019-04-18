@@ -36,6 +36,28 @@ const Button = styled.button`
 	`
 
 class SignIn extends React.Component {
+	state = {
+		email: '',
+		password: ''
+	}
+
+	handleSignIn = () => {
+		fetch('https://conduit.productionready.io/api/users/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({user: this.state}),
+    })
+    .then(res => res.json())
+    .then(d => {
+    	let jwt = localStorage.getItem('jwt');
+    	if (d.user && d.user.token == jwt) {
+    		this.props.history.push('/');
+    	}
+    })
+	}
+
 	render() {
 		return (
 			<React.Fragment>
@@ -45,7 +67,7 @@ class SignIn extends React.Component {
 					<a href='/signup' style={{textDecoration:'none',}}href="#"><div style={{textAlign: 'center', color: '#5CB75C', }}>Need an account?</div></a>
 					<Input type="email" name="email" placeholder="Email" />
 					<Input type="password" name="password" placeholder="Password" />
-					<Button type="submit">Sign In</Button>
+					<Button onClick={this.handleSignIn} type="submit">Sign In</Button>
 				</Wrapper>
 			</React.Fragment>
 		)

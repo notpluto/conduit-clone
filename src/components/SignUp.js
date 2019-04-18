@@ -1,6 +1,8 @@
 import React from 'react';
 import Navigation from './Navigation';
 import styled from 'styled-components';
+// import { Redirect } from 'react-router-dom'
+import SignIn from './SignIn'
 
 const Wrapper = styled.div`
 	margin: 4rem auto;
@@ -53,7 +55,14 @@ class SignUp extends React.Component {
       body: JSON.stringify({user: this.state}),
     })
       .then(res => res.json())
-      .then(d => console.log(d));
+      .then(d => {
+      	console.log(d);
+      	if (d.user) {
+      		let jwt = d.user.token
+      		localStorage.setItem('jwt', jwt)
+      		this.props.history.push('/signin')
+      	}
+      });
   };
 
 	render() {
